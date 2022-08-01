@@ -1,7 +1,6 @@
-from ctypes.wintypes import SHORT
 import tkinter as tk
 import tkinter.font as font
-from matplotlib.pyplot import show
+from gpiozero import CPUTemperature
 import psutil
  
 NCOLUMNS = 7
@@ -31,6 +30,7 @@ def coolBottomBar():
         labCPU['text'] = 'CPU usage: ' + str(cpu)
     else:
         labCPU['text'] = 'CPU usage:  ' + str(cpu)
+    labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     root.after(500,coolBottomBar)
 
 def update(device=0):
@@ -145,6 +145,9 @@ labRAM.grid(row=NROWS-1,column=NCOLUMNS-1,columnspan=1,sticky='NWS')
 
 labCPU = tk.Label(root,text='CPU usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
 labCPU.grid(row=NROWS-1,column=NCOLUMNS-2,columnspan=1,sticky='NWS')
+
+labTEMP = tk.Label(root,text='CPU usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
+labTEMP.grid(row=NROWS-1,column=NCOLUMNS-3,columnspan=1,sticky='NWS')
 
 tk.Label(root,text='Sotware version: 1.0.4 ', bg=BOTTOM_MENU_COLOR,fg='white').grid(row=NROWS-1,column=0,sticky='NWS',padx=PAD_X,columnspan=1)
 tk.Label(root,text='Serial: SC-0123842S ', bg=BOTTOM_MENU_COLOR,fg='white').grid(row=NROWS-1,column=1,sticky='NWS',padx=PAD_X,columnspan=1)
