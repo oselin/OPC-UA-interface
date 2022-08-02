@@ -1,6 +1,8 @@
+from platform import platform
 import tkinter as tk
 import tkinter.font as font
 import psutil
+import platform
 
  
 NCOLUMNS = 9
@@ -51,7 +53,8 @@ def coolBottomBar():
         labCPU['text'] = 'CPU usage: ' + str(cpu)
     else:
         labCPU['text'] = 'CPU usage:  ' + str(cpu)
-    labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
+    if platform.platform() == 'Linux':
+        labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     root.after(500,coolBottomBar)
 
 
