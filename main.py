@@ -1,27 +1,48 @@
 import tkinter as tk
 import tkinter.font as font
-from gpiozero import CPUTemperature
 import psutil
+
  
-NCOLUMNS = 7
+NCOLUMNS = 9
 NROWS    = 30
 SIDEMENU_COLUMNS = 2
+DEVICE_COLUMNS   = 2
 PAD_X = 20
 
 SIDEMENU_COLOR         = '#cce0ff'
-DEVICE_SECTION_COLOR   = '#eeeeee'
+DEVICE_FAMILY_COLOR   = '#e6e6e6'
+DEVICE_LIST_COLOR   = '#f2f2f2'
 DETAILED_SECTION_COLOR = '#ffffff'
 BOTTOM_MENU_COLOR      = '#0066ff'
+SELECTED_FAMILY = None
 SELECTED_DEVICE = None
 
-dev = ['TC0451','TB3421','PO0187','ZJ3253','TP-1312','RM-3112','ZZ53412','CW5823','D4512','AZ24785','SD2342','FH5323','AF7593']
 
-def deviceClick(name):
+dev = {'len':13,
+       'MODBUS-RTU':['TC0451','TB3421','PO0187','ZJ3253'],
+       'MODBUS-TCP':['TP-1312','RM-3112','ZZ53412','CW5823',],
+       'FIELDBUS'  :['D4512','AZ24785','SD2342','FH5323','AF7593']
+}
+
+
+
+def onDeviceFamilylick(name):
+    global SELECTED_FAMILY
+    frame03['bg'] = DEVICE_LIST_COLOR
+    lab08['bg']   = DEVICE_LIST_COLOR
+    SELECTED_FAMILY = name
+    for i in range(len(dev[name])):
+        tk.Button(root,text=dev[name][i],activebackground=DETAILED_SECTION_COLOR,
+                    padx=PAD_X,bd=0,command=lambda val=dev[name][i]: onDeviceClick(val),
+                         bg = DEVICE_LIST_COLOR,highlightthickness=0,anchor='w'
+                    ).grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=i+1,sticky='NWSE',columnspan=DEVICE_COLUMNS)
+
+
+def onDeviceClick(name):
     global SELECTED_DEVICE
     lab_dev['text'] = name
     SELECTED_DEVICE = name
     update(name)
-
 
 def coolBottomBar():
     labRAM['text'] = 'Ram usage: ' + str(psutil.virtual_memory().percent)
@@ -33,6 +54,7 @@ def coolBottomBar():
     labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     root.after(500,coolBottomBar)
 
+
 def update(device=0):
     if device:
         data00['text'] = 'Connection type: '
@@ -41,13 +63,20 @@ def update(device=0):
         data03['text'] = 'Incoming data: '
         data04['text'] = 'OPC-UA conversion: '
 
-        data00v['text'] = 'MODBUS'
+        data00v['text'] = SELECTED_FAMILY
         data01v['text'] = '- '
         data02v['text'] = '-  '
         data03v['text'] = '- '
         data04v['text'] = '- '
-    root.after(10,update)
 
+        tk.Button(root,text='Configure parameters',activebackground=SIDEMENU_COLOR,
+                    padx=0,pady=0,bd=0,#command=lambda val=dev[name][i]: onDeviceClick(val),
+                         bg = DEVICE_LIST_COLOR,highlightthickness=0
+                    ).grid(column=NCOLUMNS-1,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
+
+
+
+    root.after(10,update)
 
 
 root = tk.Tk()
@@ -67,6 +96,33 @@ for i in range(NROWS):
 
 
 
+"""menubar = tk.Menu(root, background='#ff8000', foreground='black', activebackground='white', activeforeground='black')  
+file = tk.Menu(menubar, tearoff=1, background='#ffcc99', foreground='black')  
+file.add_command(label="New")  
+file.add_command(label="Open")  
+file.add_command(label="Save")  
+file.add_command(label="Save as")    
+file.add_separator()  
+file.add_command(label="Exit", command=root.quit)  
+menubar.add_cascade(label="File", menu=file)  
+
+edit = tk.Menu(menubar, tearoff=0)  
+edit.add_command(label="Undo")  
+edit.add_separator()     
+edit.add_command(label="Cut")  
+edit.add_command(label="Copy")  
+edit.add_command(label="Paste")  
+menubar.add_cascade(label="Edit", menu=edit)  
+
+help = tk.Menu(menubar, tearoff=0)  
+help.add_command(label="About")#command=about)  
+menubar.add_cascade(label="Help")#, menu=help)  
+    
+root.config(menu=menubar)"""
+
+
+
+
 #==========SIDEMENU==========
 frame01 = tk.Frame(root, bg=SIDEMENU_COLOR)
 frame01.grid(column=0,row=0,columnspan=SIDEMENU_COLUMNS,rowspan=NROWS,sticky='NWSE')
@@ -81,64 +137,74 @@ lab01 = tk.Label(root,text='Status: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=
 lab02 = tk.Label(root,text='Active',fg='green',bg=SIDEMENU_COLOR,font=justBold).grid(row=2,column=1,sticky='NW')
 
 lab03 = tk.Label(root,text='Connected devices: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=3,column=0,sticky='NW',padx=PAD_X)
-lab04 = tk.Label(root,text=str(len(dev)),bg=SIDEMENU_COLOR).grid(row=3,column=1,sticky='NW')
+lab04 = tk.Label(root,text=str(dev['len']),bg=SIDEMENU_COLOR).grid(row=3,column=1,sticky='NW')
 
 lab05 = tk.Label(root,text='Warnings: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=4,column=0,sticky='NW',padx=PAD_X)
 lab06 = tk.Label(root,text='0 ',bg=SIDEMENU_COLOR).grid(row=4,column=1,sticky='NW')
 
 
-#==========DEVICE LIST==========
-frame02 = tk.Frame(root, bg=DEVICE_SECTION_COLOR)
-frame02.grid(column=2,row=0,columnspan=SIDEMENU_COLUMNS,rowspan=NROWS,sticky='NWSE')
+#==========DEVICE FAMILY LIST==========
+frame02 = tk.Frame(root, bg=DEVICE_FAMILY_COLOR)
+frame02.grid(column=SIDEMENU_COLUMNS,row=0,columnspan=DEVICE_COLUMNS,rowspan=NROWS,sticky='NWSE')
 frame02.grid_propagate(0)
 
-lab07 = tk.Label(root,text='Device list: ',bg=DEVICE_SECTION_COLOR,font=justBold).grid(row=0,column=2,columnspan=2,sticky='NWS',padx=PAD_X)
+lab07 = tk.Label(root,text='Detected protocols ',bg=DEVICE_FAMILY_COLOR,font=justBold).grid(row=0,column=SIDEMENU_COLUMNS,columnspan=DEVICE_COLUMNS,sticky='NWS',padx=PAD_X)
 
 # Fill the interface with the available connected devices
 
 
 
-for i in range(len(dev)):
-    button_i = tk.Button(root,text=dev[i],activebackground=DETAILED_SECTION_COLOR,
-                         padx=0,pady=0,bd=0,command=lambda val=dev[i]: deviceClick(val),
-                         bg = DEVICE_SECTION_COLOR,border=0
-    ).grid(column=2,row=i+1,sticky='NWSE',columnspan=2)
+for i in range(1,len(dev.keys())):
+    button_i = tk.Button(root,text=list(dev.keys())[i],activebackground=DEVICE_LIST_COLOR,
+                         padx=PAD_X,bd=0,command=lambda val=list(dev.keys())[i]: onDeviceFamilylick(val),
+                         bg = DEVICE_FAMILY_COLOR,highlightthickness=0, anchor='w'
+    ).grid(column=SIDEMENU_COLUMNS,row=i,sticky='NWSE',columnspan=DEVICE_COLUMNS)
 
-#==========DETAILED CONTENT==========
+
+#==========DEVICE LIST==========
 frame03 = tk.Frame(root, bg=DETAILED_SECTION_COLOR)
-frame03.grid(column=4,row=0,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=NROWS,sticky='NWSE')
+frame03.grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=0,columnspan=DEVICE_COLUMNS,rowspan=NROWS,sticky='NWSE')
 frame03.grid_propagate(0)
 
+lab08 = tk.Label(root,text='Devices ',bg=DETAILED_SECTION_COLOR,font=justBold)
+lab08.grid(row=0,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,columnspan=DEVICE_COLUMNS,sticky='NWS',padx=PAD_X)
+
+
+#==========DETAILED CONTENT==========
+frame04 = tk.Frame(root, bg=DETAILED_SECTION_COLOR)
+frame04.grid(column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,row=0,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=NROWS,sticky='NWSE')
+frame04.grid_propagate(0)
+
 lab_dev = tk.Label(text='',font=dev_font,bg = DETAILED_SECTION_COLOR)
-lab_dev.grid(row=0,column=4, columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2,sticky='NWSE')
+lab_dev.grid(row=0,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS, columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2,sticky='NWSE')
 
 data00  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data00.grid(row=2,column=4,sticky='NW',padx=PAD_X)
+data00.grid(row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
 data00v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data00v.grid(row=2,column=5,sticky='NW',padx=PAD_X)
+data00v.grid(row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
 
 data01  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data01.grid(row=3,column=4,sticky='NW',padx=PAD_X)
+data01.grid(row=3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
 data01v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data01v.grid(row=3,column=5,sticky='NW',padx=PAD_X)
+data01v.grid(row=3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
 data02  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data02.grid(row=4,column=4,sticky='NW',padx=PAD_X) 
+data02.grid(row=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X) 
 data02v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data02v.grid(row=4,column=5,sticky='NW',padx=PAD_X)
+data02v.grid(row=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
 
 data03  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data03.grid(row=5,column=4,sticky='NW',padx=PAD_X)
+data03.grid(row=5,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
 data03v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data03v.grid(row=6,column=4,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
+data03v.grid(row=6,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
 data04  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data04.grid(row=8,column=4,sticky='NW',padx=PAD_X)
+data04.grid(row=8,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
 data04v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data04v.grid(row=9,column=4,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
+data04v.grid(row=9,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
 
 #==========BOTTOM MENU==========
-frame04 = tk.Frame(root, bg=BOTTOM_MENU_COLOR)
-frame04.grid(column=0,row=NROWS-1,columnspan=NCOLUMNS,sticky='NWSE')
-frame04.grid_propagate(0)
+frame05 = tk.Frame(root, bg=BOTTOM_MENU_COLOR)
+frame05.grid(column=0,row=NROWS-1,columnspan=NCOLUMNS,sticky='NWSE')
+frame05.grid_propagate(0)
 
 labRAM = tk.Label(root,text='Ram usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
 labRAM.grid(row=NROWS-1,column=NCOLUMNS-1,columnspan=1,sticky='NWS')
