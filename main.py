@@ -34,7 +34,7 @@ dev = {'len':13,
 
 def serverLoop():
     try:
-        edgeDevice.queryLegacy()
+        edgeDevice.queryLegacyAndUpdateCache()
 
     except Exception as e:
         print(e)
@@ -58,7 +58,7 @@ def startService():
 
         opcuaObjects = opcuaServer.get_objects_node()
         
-        noEntriesInitialized = 100
+        noEntriesInitialized = 931
         noEntriesUpdated = 931
 
         edgeDevice = EdgeDevice(opcuaServer,modbusClient,opcuaObjects,noEntriesInitialized)
