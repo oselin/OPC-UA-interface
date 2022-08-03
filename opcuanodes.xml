@@ -6,16 +6,16 @@
     <Alias Alias="HasTypeDefinition">i=40</Alias>
     <Alias Alias="HasComponent">i=47</Alias>
   </Aliases>
-  <UAVariable NodeId="i=25755" BrowseName="0:RegisterValue" ParentNodeId="i=25754" ValueRank="0" DataType="Int64">
+  <UAVariable NodeId="i=20757" BrowseName="0:RegisterValue" ParentNodeId="i=20756" ValueRank="0" DataType="Int64">
     <DisplayName>RegisterValue</DisplayName>
     <Description>RegisterValue</Description>
     <References>
-      <Reference ReferenceType="HasComponent" IsForward="false">i=25754</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=20756</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
     </References>
     <Value>
       <uax:ListOfInt64>
-        <uax:Int64>6949</uax:Int64>
+        <uax:Int64>29487</uax:Int64>
       </uax:ListOfInt64>
     </Value>
   </UAVariable>

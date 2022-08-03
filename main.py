@@ -5,7 +5,7 @@ import platform
 import datetime
 import time
 from PIL import ImageTk, Image
-
+from server.edge_device import *
 
 NCOLUMNS = 9
 NROWS    = 30
@@ -31,6 +31,48 @@ dev = {'len':13,
        'MODBUS-TCP':['TP-1312','RM-3112','ZZ53412','CW5823',],
        'FIELDBUS'  :['D4512','AZ24785','SD2342','FH5323','AF7593']
 }
+
+def serverLoop():
+    try:
+        edgeDevice.queryLegacy()
+
+    except Exception as e:
+        print(e)
+        opcuaServer.stop()
+        print("Stopping Edge device")
+        modbusClient.close()
+    
+    root.after(500,serverLoop)
+
+
+def startService():
+    global edgeDevice, modbusClient, opcuaServer
+    lab02['text'] = 'Starting...'
+    lab02['fg']  = 'orange'
+    try:
+        modbusClient = ModbusClient('localhost', 12000)
+        print("Starting Edge device")
+        modbusClient.open()
+        # parse the xls into opc ua object types
+        opcuaServer = Server()
+
+        opcuaObjects = opcuaServer.get_objects_node()
+        
+        noEntriesInitialized = 100
+        noEntriesUpdated = 931
+
+        edgeDevice = EdgeDevice(opcuaServer,modbusClient,opcuaObjects,noEntriesInitialized)
+        edgeDevice.initializeFromLegacy()
+
+        lab02['text'] = 'Active'
+        lab02['fg']  = 'green'
+
+    except Exception as e:
+        print(e)
+        opcuaServer.stop()
+        print("startService : Stopping Edge device")
+        modbusClient.close()
+    serverLoop()
 
 
 def onConfigureClick():
@@ -62,6 +104,8 @@ def onDeviceFamilyClick(name):
 
         tk.Label(root, image = statusOnline,bg=DEVICE_LIST_COLOR,width=10, height=10, activebackground=DETAILED_SECTION_COLOR
         ).grid(row=i+1,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS+1,columnspan=1,sticky='NSE',padx=PAD_X)
+
+
 def onDeviceClick(name):
     global SELECTED_DEVICE
     lab_dev['text'] = name
@@ -70,11 +114,6 @@ def onDeviceClick(name):
 
 
 def coolBottomBar():
-    global STARTED
-    if STARTED == 10:
-        time.sleep(1)
-        lab02['text'] = 'Active'
-        lab02['fg']  = 'green'
     labRAM['text'] = 'Ram usage: ' + str(psutil.virtual_memory().percent)
     cpu = psutil.cpu_percent()
     if (cpu >= 10):
@@ -85,8 +124,7 @@ def coolBottomBar():
         labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     
     uptime['text']  = '10d ' + datetime.datetime.now().strftime('%Hh %Mmin %Ssec')
-    if STARTED < 10:
-        STARTED += 1
+
     root.after(500,coolBottomBar)
 
 
@@ -118,10 +156,6 @@ def update(device=0):
         root.after(10,update)
 
 
-def _create_circle(self, x, y, r, **kwargs):
-    return self.create_oval(x-r, y-r, x+r, y+r, **kwargs)
-tk.Canvas.create_circle = _create_circle
-
 root = tk.Tk()
 root.geometry("1440x800")
 root.minsize(1200,700)
@@ -152,7 +186,7 @@ lab00.grid(row=0,column=0,sticky='NWSE',rowspan=2,columnspan=SIDEMENU_COLUMNS)
 
 
 lab01 = tk.Label(root,text='Status: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=2,column=0,sticky='NW',padx=PAD_X)
-lab02 = tk.Label(root,text='Starting...',fg='orange',bg=SIDEMENU_COLOR,font=justBold)
+lab02 = tk.Label(root,text='Stopped',fg='red',bg=SIDEMENU_COLOR,font=justBold)
 lab02.grid(row=2,column=1,sticky='NW')
 
 lab03 = tk.Label(root,text='Connected devices: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=3,column=0,sticky='NW',padx=PAD_X)
@@ -164,6 +198,12 @@ lab06 = tk.Label(root,text='0 ',bg=SIDEMENU_COLOR).grid(row=4,column=1,sticky='N
 tk.Label(root,text='Uptime: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=5,column=0,sticky='NW',padx=PAD_X)
 uptime = tk.Label(root,text='0 ',bg=SIDEMENU_COLOR)
 uptime.grid(row=5,column=1,sticky='NW')
+
+tk.Button(root,text='Start communication',activebackground=SIDEMENU_COLOR,
+                    padx=0,pady=0,bd=0,command=lambda : startService(),
+                         bg = DEVICE_LIST_COLOR,highlightthickness=0
+                    ).grid(column=0,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
+
 
 
 #==========DEVICE FAMILY LIST==========
@@ -258,7 +298,5 @@ tk.Label(root,text='Serial: SC-0123842S ', bg=BOTTOM_MENU_COLOR,fg='white').grid
 
 update()
 coolBottomBar()
-
-
 
 root.mainloop()
