@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris />
+  <Aliases>
+    <Alias Alias="Int64">i=8</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+  <UAVariable NodeId="i=25755" BrowseName="0:RegisterValue" ParentNodeId="i=25754" ValueRank="0" DataType="Int64">
+    <DisplayName>RegisterValue</DisplayName>
+    <Description>RegisterValue</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=25754</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:ListOfInt64>
+        <uax:Int64>6949</uax:Int64>
+      </uax:ListOfInt64>
+    </Value>
+  </UAVariable>
+</UANodeSet>
