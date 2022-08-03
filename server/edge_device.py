@@ -9,7 +9,7 @@ modbusClient = ModbusClient('localhost', 12000)
 print("Starting Edge device")
 modbusClient.open()
 
-excelData = pd.read_excel('ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
+excelData = pd.read_excel('data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
 df = pd.DataFrame(excelData)
 
 print("Device info read. Reading the registers")
