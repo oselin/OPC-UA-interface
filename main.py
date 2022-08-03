@@ -3,7 +3,10 @@ import tkinter.font as font
 import psutil
 import platform
 import datetime
- 
+import time
+from PIL import ImageTk, Image
+
+
 NCOLUMNS = 9
 NROWS    = 30
 SIDEMENU_COLUMNS = 2
@@ -21,6 +24,7 @@ SELECTED_DEVICE = None
 ID    = 0
 TEMP  = 0
 CLOCK = 0
+STARTED = 0
 
 dev = {'len':13,
        'MODBUS-RTU':['TC0451','TB3421','PO0187','ZJ3253'],
@@ -44,6 +48,7 @@ def onConfigureClick():
                          bg = DEVICE_LIST_COLOR,highlightthickness=0
                     ).grid(column=NCOLUMNS-1,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
 
+
 def onDeviceFamilyClick(name):
     global SELECTED_FAMILY
     frame03['bg'] = DEVICE_LIST_COLOR
@@ -55,14 +60,21 @@ def onDeviceFamilyClick(name):
                          bg = DEVICE_LIST_COLOR,highlightthickness=0,anchor='w'
                     ).grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=i+1,sticky='NWSE',columnspan=DEVICE_COLUMNS)
 
-
+        tk.Label(root, image = statusOnline,bg=DEVICE_LIST_COLOR,width=10, height=10, activebackground=DETAILED_SECTION_COLOR
+        ).grid(row=i+1,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS+1,columnspan=1,sticky='NSE',padx=PAD_X)
 def onDeviceClick(name):
     global SELECTED_DEVICE
     lab_dev['text'] = name
     SELECTED_DEVICE = name
     update(name)
 
+
 def coolBottomBar():
+    global STARTED
+    if STARTED == 10:
+        time.sleep(1)
+        lab02['text'] = 'Active'
+        lab02['fg']  = 'green'
     labRAM['text'] = 'Ram usage: ' + str(psutil.virtual_memory().percent)
     cpu = psutil.cpu_percent()
     if (cpu >= 10):
@@ -73,6 +85,8 @@ def coolBottomBar():
         labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     
     uptime['text']  = '10d ' + datetime.datetime.now().strftime('%Hh %Mmin %Ssec')
+    if STARTED < 10:
+        STARTED += 1
     root.after(500,coolBottomBar)
 
 
@@ -104,6 +118,10 @@ def update(device=0):
         root.after(10,update)
 
 
+def _create_circle(self, x, y, r, **kwargs):
+    return self.create_oval(x-r, y-r, x+r, y+r, **kwargs)
+tk.Canvas.create_circle = _create_circle
+
 root = tk.Tk()
 root.geometry("1440x800")
 root.minsize(1200,700)
@@ -120,33 +138,8 @@ for i in range(NROWS):
     root.grid_rowconfigure(i,weight=1)
 
 
-
-"""menubar = tk.Menu(root, background='#ff8000', foreground='black', activebackground='white', activeforeground='black')  
-file = tk.Menu(menubar, tearoff=1, background='#ffcc99', foreground='black')  
-file.add_command(label="New")  
-file.add_command(label="Open")  
-file.add_command(label="Save")  
-file.add_command(label="Save as")    
-file.add_separator()  
-file.add_command(label="Exit", command=root.quit)  
-menubar.add_cascade(label="File", menu=file)  
-
-edit = tk.Menu(menubar, tearoff=0)  
-edit.add_command(label="Undo")  
-edit.add_separator()     
-edit.add_command(label="Cut")  
-edit.add_command(label="Copy")  
-edit.add_command(label="Paste")  
-menubar.add_cascade(label="Edit", menu=edit)  
-
-help = tk.Menu(menubar, tearoff=0)  
-help.add_command(label="About")#command=about)  
-menubar.add_cascade(label="Help")#, menu=help)  
-    
-root.config(menu=menubar)"""
-
-
-
+statusOnline = ImageTk.PhotoImage(Image.open("assets/green_dot.png").resize((10, 10)))
+statusOffline = ImageTk.PhotoImage(Image.open("assets/red_dot.png").resize((10, 10)))
 
 #==========SIDEMENU==========
 frame01 = tk.Frame(root, bg=SIDEMENU_COLOR)
@@ -159,7 +152,8 @@ lab00.grid(row=0,column=0,sticky='NWSE',rowspan=2,columnspan=SIDEMENU_COLUMNS)
 
 
 lab01 = tk.Label(root,text='Status: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=2,column=0,sticky='NW',padx=PAD_X)
-lab02 = tk.Label(root,text='Active',fg='green',bg=SIDEMENU_COLOR,font=justBold).grid(row=2,column=1,sticky='NW')
+lab02 = tk.Label(root,text='Starting...',fg='orange',bg=SIDEMENU_COLOR,font=justBold)
+lab02.grid(row=2,column=1,sticky='NW')
 
 lab03 = tk.Label(root,text='Connected devices: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=3,column=0,sticky='NW',padx=PAD_X)
 lab04 = tk.Label(root,text=str(dev['len']),bg=SIDEMENU_COLOR).grid(row=3,column=1,sticky='NW')
@@ -233,7 +227,6 @@ data04v.grid(row=9,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD
 #=========SETTINGS PAGE=========
 frame05 = tk.Frame(root, bg=DETAILED_SECTION_COLOR)
 
-
 lab09 = tk.Label(root,text='Settings and custom queries ',bg=DETAILED_SECTION_COLOR,font=justBold)
 
 cbID = tk.Checkbutton(root, text='ID',variable=ID, onvalue=1, offvalue=0,bg=DETAILED_SECTION_COLOR,
@@ -265,5 +258,7 @@ tk.Label(root,text='Serial: SC-0123842S ', bg=BOTTOM_MENU_COLOR,fg='white').grid
 
 update()
 coolBottomBar()
+
+
 
 root.mainloop()
