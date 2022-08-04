@@ -8,9 +8,6 @@ from PIL import ImageTk, Image
 from server.edge_device import *
 from opcua.common.xmlexporter import XmlExporter
 
-from lxml import etree
-
-
 
 NCOLUMNS = 9
 NROWS    = 30
@@ -49,7 +46,7 @@ def serverLoop():
             # get the OPC-UA values
             obj = edgeDevice.getAndUpsertOpcNodeFromRegister(i)
 
-            opcuaServer.export_xml(obj.get_referenced_nodes(), "cache/opcuanodes-%i.xml" % (i))
+            opcuaServer.export_xml(obj.get_children(), "cache/opcuanodes-%i.xml" % (i))
 
 
     except Exception as e:
