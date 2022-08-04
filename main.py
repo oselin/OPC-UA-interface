@@ -27,6 +27,7 @@ SELECTED_DEVICE = None
 FETCHED_REGISTRIES = 10
 SHOW_DATA = None
 
+STATUS = 0
 dev = {'len':13,
        'MODBUS-RTU':['TC0451','TB3421','PO0187','ZJ3253'],
        'MODBUS-TCP':['TP-1312','RM-3112','ZZ53412','CW5823',],
@@ -66,37 +67,57 @@ def serverLoop():
         print("Stopping Edge device")
         modbusClient.close()
     
-    root.after(500,serverLoop)
+    root.after(500,serverLoop)  
 
 
 def startService():
-    global edgeDevice, modbusClient, opcuaServer
-    lab02['text'] = 'Starting...'
-    lab02['fg']  = 'orange'
-    try:
-        modbusClient = ModbusClient('localhost', 12000)
-        print("Starting Edge device")
-        modbusClient.open()
-        # parse the xls into opc ua object types
-        opcuaServer = Server()
 
-        opcuaObjects = opcuaServer.get_objects_node()
-        
-        noEntriesInitialized = 931
-        noEntriesUpdated = 931
+    global STATUS
+    if not STATUS:
+        global edgeDevice, modbusClient, opcuaServer
+        lab02['text'] = 'Starting...'
+        lab02['fg']  = 'orange'
+        try:
+            modbusClient = ModbusClient('localhost', 12000)
+            print("Starting Edge device")
+            modbusClient.open()
+            # parse the xls into opc ua object types
+            opcuaServer = Server()
 
-        edgeDevice = EdgeDevice(opcuaServer,modbusClient,opcuaObjects,noEntriesInitialized)
-        edgeDevice.initializeFromLegacy()
+            opcuaObjects = opcuaServer.get_objects_node()
+            
+            noEntriesInitialized = 931
+            noEntriesUpdated = 931
 
-        lab02['text'] = 'Active'
-        lab02['fg']  = 'green'
+            edgeDevice = EdgeDevice(opcuaServer,modbusClient,opcuaObjects,noEntriesInitialized)
+            edgeDevice.initializeFromLegacy()
 
-    except Exception as e:
-        print(e)
-        opcuaServer.stop()
+            lab02['text'] = 'Active'
+            lab02['fg']  = 'green'
+            commBtn['text'] = 'Close communication'
+            print(type(opcuaServer))
+        except Exception as e:
+            print(e)
+            opcuaServer.stop()
+            print("startService : Stopping Edge device")
+            modbusClient.close()
+        STATUS = 1
+        serverLoop()
+    else:
+        STATUS = 0
         print("startService : Stopping Edge device")
         modbusClient.close()
-    serverLoop()
+        print(type(opcuaServer))
+        opcuaServer.stop()
+
+
+
+        for i in range(FETCHED_REGISTRIES):
+            mytable[i][0].grid_forget()
+            mytable[i][1].grid_forget()
+            mytable[i][2].grid_forget()
+        OPCdata.grid_forget()
+
 
 
 def onDeviceFamilyClick(name):
@@ -231,10 +252,11 @@ tk.Label(root,text='Uptime: ',bg=SIDEMENU_COLOR,font=justBold).grid(row=5,column
 uptime = tk.Label(root,text='0 ',bg=SIDEMENU_COLOR)
 uptime.grid(row=5,column=1,sticky='NW')
 
-tk.Button(root,text='Start communication',activebackground=SIDEMENU_COLOR,
+commBtn = tk.Button(root,text='Start communication',activebackground=SIDEMENU_COLOR,
                     padx=0,pady=0,bd=0,command=lambda : startService(),
                          bg = DEVICE_LIST_COLOR,highlightthickness=0
-                    ).grid(column=0,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
+                    )
+commBtn.grid(column=0,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
 
 
 
