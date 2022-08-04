@@ -84,7 +84,10 @@ class EdgeDevice():
         idx = self.registerAddressToXmlIndex.get(registerAddress, -1)
         if idx >= 0: #object data known from the xml
             try: #try to return it if it exists
-                return self.opcuaObjects.get_child(self.df.at[idx, 'Name'])
+                atv72object: Node = self.opcuaObjects.get_child(self.df.at[idx, 'Name'])
+                value = atv72object.get_child("RegisterValue")
+                value.set_value(self.readLegacyRegisterWithCaching(registerAddress))
+                return atv72object
             except: #if it doesnt exist then create it and return it
                 atv72object: Node = self.opcuaObjects.add_object(0, self.df.at[idx, 'Name'], self.ATV72TYPE)
                 atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching())
@@ -112,8 +115,11 @@ class EdgeDevice():
 
             return atv72object
 
-    def writeToLegacyDevice(self, registerAddress:int, value:int):
+    def writeToLegacyDeviceAndCache(self, registerAddress:int, value:int):
         self.modbusClient.write_single_register(registerAddress, value)
+        if self.registerCache.get(registerAddress, -12345) != -12345:
+            self.registerCache[registerAddress] = value
+            self.getAndUpsertOpcNodeFromRegister(registerAddress)
 
 #modbusClient = ModbusClient('localhost', 12000)
 #print("Starting Edge device")
