@@ -1,0 +1,696 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris />
+  <Aliases>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="Int64">i=8</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+  <UAObject NodeId="i=85" BrowseName="0:Objects" ParentNodeId="i=84">
+    <DisplayName>Objects</DisplayName>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=84</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+      <Reference ReferenceType="Organizes">i=2253</Reference>
+      <Reference ReferenceType="Organizes">i=20018</Reference>
+      <Reference ReferenceType="Organizes">i=20036</Reference>
+      <Reference ReferenceType="Organizes">i=20054</Reference>
+      <Reference ReferenceType="Organizes">i=20072</Reference>
+      <Reference ReferenceType="Organizes">i=20090</Reference>
+      <Reference ReferenceType="Organizes">i=20108</Reference>
+      <Reference ReferenceType="Organizes">i=20126</Reference>
+      <Reference ReferenceType="Organizes">i=20144</Reference>
+      <Reference ReferenceType="Organizes">i=20162</Reference>
+      <Reference ReferenceType="Organizes">i=20180</Reference>
+      <Reference ReferenceType="Organizes">i=20198</Reference>
+      <Reference ReferenceType="Organizes">i=20216</Reference>
+      <Reference ReferenceType="Organizes">i=20234</Reference>
+      <Reference ReferenceType="Organizes">i=20252</Reference>
+      <Reference ReferenceType="Organizes">i=20270</Reference>
+      <Reference ReferenceType="Organizes">i=20288</Reference>
+      <Reference ReferenceType="Organizes">i=20306</Reference>
+      <Reference ReferenceType="Organizes">i=20324</Reference>
+      <Reference ReferenceType="Organizes">i=20342</Reference>
+      <Reference ReferenceType="Organizes">i=20360</Reference>
+      <Reference ReferenceType="Organizes">i=20378</Reference>
+      <Reference ReferenceType="Organizes">i=20396</Reference>
+      <Reference ReferenceType="Organizes">i=20414</Reference>
+      <Reference ReferenceType="Organizes">i=20432</Reference>
+      <Reference ReferenceType="Organizes">i=20450</Reference>
+      <Reference ReferenceType="Organizes">i=20468</Reference>
+      <Reference ReferenceType="Organizes">i=20486</Reference>
+      <Reference ReferenceType="Organizes">i=20504</Reference>
+      <Reference ReferenceType="Organizes">i=20522</Reference>
+      <Reference ReferenceType="Organizes">i=20540</Reference>
+      <Reference ReferenceType="Organizes">i=20558</Reference>
+      <Reference ReferenceType="Organizes">i=20576</Reference>
+      <Reference ReferenceType="Organizes">i=20594</Reference>
+      <Reference ReferenceType="Organizes">i=20612</Reference>
+      <Reference ReferenceType="Organizes">i=20630</Reference>
+      <Reference ReferenceType="Organizes">i=20648</Reference>
+      <Reference ReferenceType="Organizes">i=20666</Reference>
+      <Reference ReferenceType="Organizes">i=20684</Reference>
+      <Reference ReferenceType="Organizes">i=20702</Reference>
+      <Reference ReferenceType="Organizes">i=20720</Reference>
+      <Reference ReferenceType="Organizes">i=20738</Reference>
+      <Reference ReferenceType="Organizes">i=20756</Reference>
+      <Reference ReferenceType="Organizes">i=20774</Reference>
+      <Reference ReferenceType="Organizes">i=20792</Reference>
+      <Reference ReferenceType="Organizes">i=20810</Reference>
+      <Reference ReferenceType="Organizes">i=20828</Reference>
+      <Reference ReferenceType="Organizes">i=20846</Reference>
+      <Reference ReferenceType="Organizes">i=20864</Reference>
+      <Reference ReferenceType="Organizes">i=20882</Reference>
+      <Reference ReferenceType="Organizes">i=20900</Reference>
+      <Reference ReferenceType="Organizes">i=20918</Reference>
+      <Reference ReferenceType="Organizes">i=20936</Reference>
+      <Reference ReferenceType="Organizes">i=20954</Reference>
+      <Reference ReferenceType="Organizes">i=20972</Reference>
+      <Reference ReferenceType="Organizes">i=20990</Reference>
+      <Reference ReferenceType="Organizes">i=21013</Reference>
+      <Reference ReferenceType="Organizes">i=21031</Reference>
+      <Reference ReferenceType="Organizes">i=21049</Reference>
+      <Reference ReferenceType="Organizes">i=21067</Reference>
+      <Reference ReferenceType="Organizes">i=21085</Reference>
+      <Reference ReferenceType="Organizes">i=21103</Reference>
+      <Reference ReferenceType="Organizes">i=21121</Reference>
+      <Reference ReferenceType="Organizes">i=21139</Reference>
+      <Reference ReferenceType="Organizes">i=21158</Reference>
+      <Reference ReferenceType="Organizes">i=21182</Reference>
+      <Reference ReferenceType="Organizes">i=21205</Reference>
+      <Reference ReferenceType="Organizes">i=21223</Reference>
+      <Reference ReferenceType="Organizes">i=21241</Reference>
+      <Reference ReferenceType="Organizes">i=21259</Reference>
+      <Reference ReferenceType="Organizes">i=21277</Reference>
+      <Reference ReferenceType="Organizes">i=21295</Reference>
+      <Reference ReferenceType="Organizes">i=21313</Reference>
+      <Reference ReferenceType="Organizes">i=21331</Reference>
+      <Reference ReferenceType="Organizes">i=21349</Reference>
+      <Reference ReferenceType="Organizes">i=21367</Reference>
+      <Reference ReferenceType="Organizes">i=21385</Reference>
+      <Reference ReferenceType="Organizes">i=21403</Reference>
+      <Reference ReferenceType="Organizes">i=21421</Reference>
+      <Reference ReferenceType="Organizes">i=21439</Reference>
+      <Reference ReferenceType="Organizes">i=21457</Reference>
+      <Reference ReferenceType="Organizes">i=21475</Reference>
+      <Reference ReferenceType="Organizes">i=21493</Reference>
+      <Reference ReferenceType="Organizes">i=21511</Reference>
+      <Reference ReferenceType="Organizes">i=21529</Reference>
+      <Reference ReferenceType="Organizes">i=21547</Reference>
+      <Reference ReferenceType="Organizes">i=21565</Reference>
+      <Reference ReferenceType="Organizes">i=21583</Reference>
+      <Reference ReferenceType="Organizes">i=21601</Reference>
+      <Reference ReferenceType="Organizes">i=21619</Reference>
+      <Reference ReferenceType="Organizes">i=21637</Reference>
+      <Reference ReferenceType="Organizes">i=21655</Reference>
+      <Reference ReferenceType="Organizes">i=21673</Reference>
+      <Reference ReferenceType="Organizes">i=21691</Reference>
+      <Reference ReferenceType="Organizes">i=21709</Reference>
+      <Reference ReferenceType="Organizes">i=21727</Reference>
+      <Reference ReferenceType="Organizes">i=21745</Reference>
+      <Reference ReferenceType="Organizes">i=21763</Reference>
+      <Reference ReferenceType="Organizes">i=21781</Reference>
+      <Reference ReferenceType="Organizes">i=21799</Reference>
+      <Reference ReferenceType="Organizes">i=21817</Reference>
+      <Reference ReferenceType="Organizes">i=21835</Reference>
+      <Reference ReferenceType="Organizes">i=21853</Reference>
+      <Reference ReferenceType="Organizes">i=21871</Reference>
+      <Reference ReferenceType="Organizes">i=21889</Reference>
+      <Reference ReferenceType="Organizes">i=21907</Reference>
+      <Reference ReferenceType="Organizes">i=21925</Reference>
+      <Reference ReferenceType="Organizes">i=21943</Reference>
+      <Reference ReferenceType="Organizes">i=21961</Reference>
+      <Reference ReferenceType="Organizes">i=21979</Reference>
+      <Reference ReferenceType="Organizes">i=21997</Reference>
+      <Reference ReferenceType="Organizes">i=22015</Reference>
+      <Reference ReferenceType="Organizes">i=22033</Reference>
+      <Reference ReferenceType="Organizes">i=22051</Reference>
+      <Reference ReferenceType="Organizes">i=22069</Reference>
+      <Reference ReferenceType="Organizes">i=22087</Reference>
+      <Reference ReferenceType="Organizes">i=22105</Reference>
+      <Reference ReferenceType="Organizes">i=22123</Reference>
+      <Reference ReferenceType="Organizes">i=22141</Reference>
+      <Reference ReferenceType="Organizes">i=22159</Reference>
+      <Reference ReferenceType="Organizes">i=22177</Reference>
+      <Reference ReferenceType="Organizes">i=22195</Reference>
+      <Reference ReferenceType="Organizes">i=22213</Reference>
+      <Reference ReferenceType="Organizes">i=22231</Reference>
+      <Reference ReferenceType="Organizes">i=22249</Reference>
+      <Reference ReferenceType="Organizes">i=22267</Reference>
+      <Reference ReferenceType="Organizes">i=22285</Reference>
+      <Reference ReferenceType="Organizes">i=22303</Reference>
+      <Reference ReferenceType="Organizes">i=22321</Reference>
+      <Reference ReferenceType="Organizes">i=22339</Reference>
+      <Reference ReferenceType="Organizes">i=22357</Reference>
+      <Reference ReferenceType="Organizes">i=22375</Reference>
+      <Reference ReferenceType="Organizes">i=22393</Reference>
+      <Reference ReferenceType="Organizes">i=22411</Reference>
+      <Reference ReferenceType="Organizes">i=22429</Reference>
+      <Reference ReferenceType="Organizes">i=22447</Reference>
+      <Reference ReferenceType="Organizes">i=22465</Reference>
+      <Reference ReferenceType="Organizes">i=22483</Reference>
+      <Reference ReferenceType="Organizes">i=22501</Reference>
+      <Reference ReferenceType="Organizes">i=22519</Reference>
+      <Reference ReferenceType="Organizes">i=22537</Reference>
+      <Reference ReferenceType="Organizes">i=22555</Reference>
+      <Reference ReferenceType="Organizes">i=22573</Reference>
+      <Reference ReferenceType="Organizes">i=22591</Reference>
+      <Reference ReferenceType="Organizes">i=22609</Reference>
+      <Reference ReferenceType="Organizes">i=22627</Reference>
+      <Reference ReferenceType="Organizes">i=22645</Reference>
+      <Reference ReferenceType="Organizes">i=22663</Reference>
+      <Reference ReferenceType="Organizes">i=22681</Reference>
+      <Reference ReferenceType="Organizes">i=22699</Reference>
+      <Reference ReferenceType="Organizes">i=22717</Reference>
+      <Reference ReferenceType="Organizes">i=22735</Reference>
+      <Reference ReferenceType="Organizes">i=22753</Reference>
+      <Reference ReferenceType="Organizes">i=22771</Reference>
+      <Reference ReferenceType="Organizes">i=22789</Reference>
+      <Reference ReferenceType="Organizes">i=22807</Reference>
+      <Reference ReferenceType="Organizes">i=22825</Reference>
+      <Reference ReferenceType="Organizes">i=22843</Reference>
+      <Reference ReferenceType="Organizes">i=22861</Reference>
+      <Reference ReferenceType="Organizes">i=22879</Reference>
+      <Reference ReferenceType="Organizes">i=22897</Reference>
+      <Reference ReferenceType="Organizes">i=22915</Reference>
+      <Reference ReferenceType="Organizes">i=22933</Reference>
+      <Reference ReferenceType="Organizes">i=22951</Reference>
+      <Reference ReferenceType="Organizes">i=22969</Reference>
+      <Reference ReferenceType="Organizes">i=22987</Reference>
+      <Reference ReferenceType="Organizes">i=23005</Reference>
+      <Reference ReferenceType="Organizes">i=23023</Reference>
+      <Reference ReferenceType="Organizes">i=23041</Reference>
+      <Reference ReferenceType="Organizes">i=23059</Reference>
+      <Reference ReferenceType="Organizes">i=23077</Reference>
+      <Reference ReferenceType="Organizes">i=23095</Reference>
+      <Reference ReferenceType="Organizes">i=23113</Reference>
+      <Reference ReferenceType="Organizes">i=23131</Reference>
+      <Reference ReferenceType="Organizes">i=23149</Reference>
+      <Reference ReferenceType="Organizes">i=23167</Reference>
+      <Reference ReferenceType="Organizes">i=23185</Reference>
+      <Reference ReferenceType="Organizes">i=23203</Reference>
+      <Reference ReferenceType="Organizes">i=23221</Reference>
+      <Reference ReferenceType="Organizes">i=23239</Reference>
+      <Reference ReferenceType="Organizes">i=23257</Reference>
+      <Reference ReferenceType="Organizes">i=23275</Reference>
+      <Reference ReferenceType="Organizes">i=23293</Reference>
+      <Reference ReferenceType="Organizes">i=23311</Reference>
+      <Reference ReferenceType="Organizes">i=23329</Reference>
+      <Reference ReferenceType="Organizes">i=23347</Reference>
+      <Reference ReferenceType="Organizes">i=23365</Reference>
+      <Reference ReferenceType="Organizes">i=23383</Reference>
+      <Reference ReferenceType="Organizes">i=23401</Reference>
+      <Reference ReferenceType="Organizes">i=23419</Reference>
+      <Reference ReferenceType="Organizes">i=23437</Reference>
+      <Reference ReferenceType="Organizes">i=23455</Reference>
+      <Reference ReferenceType="Organizes">i=23473</Reference>
+      <Reference ReferenceType="Organizes">i=23491</Reference>
+      <Reference ReferenceType="Organizes">i=23519</Reference>
+      <Reference ReferenceType="Organizes">i=23540</Reference>
+      <Reference ReferenceType="Organizes">i=23558</Reference>
+      <Reference ReferenceType="Organizes">i=23576</Reference>
+      <Reference ReferenceType="Organizes">i=23594</Reference>
+      <Reference ReferenceType="Organizes">i=23612</Reference>
+      <Reference ReferenceType="Organizes">i=23630</Reference>
+      <Reference ReferenceType="Organizes">i=23648</Reference>
+      <Reference ReferenceType="Organizes">i=23666</Reference>
+      <Reference ReferenceType="Organizes">i=23684</Reference>
+      <Reference ReferenceType="Organizes">i=23702</Reference>
+      <Reference ReferenceType="Organizes">i=23720</Reference>
+      <Reference ReferenceType="Organizes">i=23738</Reference>
+      <Reference ReferenceType="Organizes">i=23756</Reference>
+      <Reference ReferenceType="Organizes">i=23774</Reference>
+      <Reference ReferenceType="Organizes">i=23792</Reference>
+      <Reference ReferenceType="Organizes">i=23810</Reference>
+      <Reference ReferenceType="Organizes">i=23828</Reference>
+      <Reference ReferenceType="Organizes">i=23846</Reference>
+      <Reference ReferenceType="Organizes">i=23864</Reference>
+      <Reference ReferenceType="Organizes">i=23882</Reference>
+      <Reference ReferenceType="Organizes">i=23900</Reference>
+      <Reference ReferenceType="Organizes">i=23918</Reference>
+      <Reference ReferenceType="Organizes">i=23936</Reference>
+      <Reference ReferenceType="Organizes">i=23954</Reference>
+      <Reference ReferenceType="Organizes">i=23972</Reference>
+      <Reference ReferenceType="Organizes">i=23990</Reference>
+      <Reference ReferenceType="Organizes">i=24008</Reference>
+      <Reference ReferenceType="Organizes">i=24026</Reference>
+      <Reference ReferenceType="Organizes">i=24044</Reference>
+      <Reference ReferenceType="Organizes">i=24062</Reference>
+      <Reference ReferenceType="Organizes">i=24080</Reference>
+      <Reference ReferenceType="Organizes">i=24098</Reference>
+      <Reference ReferenceType="Organizes">i=24116</Reference>
+      <Reference ReferenceType="Organizes">i=24134</Reference>
+      <Reference ReferenceType="Organizes">i=24152</Reference>
+      <Reference ReferenceType="Organizes">i=24170</Reference>
+      <Reference ReferenceType="Organizes">i=24188</Reference>
+      <Reference ReferenceType="Organizes">i=24206</Reference>
+      <Reference ReferenceType="Organizes">i=24224</Reference>
+      <Reference ReferenceType="Organizes">i=24242</Reference>
+      <Reference ReferenceType="Organizes">i=24260</Reference>
+      <Reference ReferenceType="Organizes">i=24278</Reference>
+      <Reference ReferenceType="Organizes">i=24296</Reference>
+      <Reference ReferenceType="Organizes">i=24314</Reference>
+      <Reference ReferenceType="Organizes">i=24332</Reference>
+      <Reference ReferenceType="Organizes">i=24350</Reference>
+      <Reference ReferenceType="Organizes">i=24368</Reference>
+      <Reference ReferenceType="Organizes">i=24386</Reference>
+      <Reference ReferenceType="Organizes">i=24404</Reference>
+      <Reference ReferenceType="Organizes">i=24422</Reference>
+      <Reference ReferenceType="Organizes">i=24440</Reference>
+      <Reference ReferenceType="Organizes">i=24458</Reference>
+      <Reference ReferenceType="Organizes">i=24476</Reference>
+      <Reference ReferenceType="Organizes">i=24494</Reference>
+      <Reference ReferenceType="Organizes">i=24512</Reference>
+      <Reference ReferenceType="Organizes">i=24530</Reference>
+      <Reference ReferenceType="Organizes">i=24548</Reference>
+      <Reference ReferenceType="Organizes">i=24566</Reference>
+      <Reference ReferenceType="Organizes">i=24584</Reference>
+      <Reference ReferenceType="Organizes">i=24602</Reference>
+      <Reference ReferenceType="Organizes">i=24620</Reference>
+      <Reference ReferenceType="Organizes">i=24638</Reference>
+      <Reference ReferenceType="Organizes">i=24656</Reference>
+      <Reference ReferenceType="Organizes">i=24674</Reference>
+      <Reference ReferenceType="Organizes">i=24692</Reference>
+      <Reference ReferenceType="Organizes">i=24710</Reference>
+      <Reference ReferenceType="Organizes">i=24728</Reference>
+      <Reference ReferenceType="Organizes">i=24746</Reference>
+      <Reference ReferenceType="Organizes">i=24764</Reference>
+      <Reference ReferenceType="Organizes">i=24782</Reference>
+      <Reference ReferenceType="Organizes">i=24800</Reference>
+      <Reference ReferenceType="Organizes">i=24818</Reference>
+      <Reference ReferenceType="Organizes">i=24836</Reference>
+      <Reference ReferenceType="Organizes">i=24854</Reference>
+      <Reference ReferenceType="Organizes">i=24872</Reference>
+      <Reference ReferenceType="Organizes">i=24890</Reference>
+      <Reference ReferenceType="Organizes">i=24908</Reference>
+      <Reference ReferenceType="Organizes">i=24926</Reference>
+      <Reference ReferenceType="Organizes">i=24944</Reference>
+      <Reference ReferenceType="Organizes">i=24962</Reference>
+      <Reference ReferenceType="Organizes">i=24980</Reference>
+      <Reference ReferenceType="Organizes">i=24998</Reference>
+      <Reference ReferenceType="Organizes">i=25016</Reference>
+      <Reference ReferenceType="Organizes">i=25034</Reference>
+      <Reference ReferenceType="Organizes">i=25052</Reference>
+      <Reference ReferenceType="Organizes">i=25070</Reference>
+      <Reference ReferenceType="Organizes">i=25088</Reference>
+      <Reference ReferenceType="Organizes">i=25106</Reference>
+      <Reference ReferenceType="Organizes">i=25124</Reference>
+      <Reference ReferenceType="Organizes">i=25142</Reference>
+      <Reference ReferenceType="Organizes">i=25160</Reference>
+      <Reference ReferenceType="Organizes">i=25178</Reference>
+      <Reference ReferenceType="Organizes">i=25196</Reference>
+      <Reference ReferenceType="Organizes">i=25214</Reference>
+      <Reference ReferenceType="Organizes">i=25232</Reference>
+      <Reference ReferenceType="Organizes">i=25250</Reference>
+      <Reference ReferenceType="Organizes">i=25268</Reference>
+      <Reference ReferenceType="Organizes">i=25286</Reference>
+      <Reference ReferenceType="Organizes">i=25304</Reference>
+      <Reference ReferenceType="Organizes">i=25322</Reference>
+      <Reference ReferenceType="Organizes">i=25340</Reference>
+      <Reference ReferenceType="Organizes">i=25358</Reference>
+      <Reference ReferenceType="Organizes">i=25376</Reference>
+      <Reference ReferenceType="Organizes">i=25394</Reference>
+      <Reference ReferenceType="Organizes">i=25412</Reference>
+      <Reference ReferenceType="Organizes">i=25430</Reference>
+      <Reference ReferenceType="Organizes">i=25448</Reference>
+      <Reference ReferenceType="Organizes">i=25466</Reference>
+      <Reference ReferenceType="Organizes">i=25484</Reference>
+      <Reference ReferenceType="Organizes">i=25502</Reference>
+      <Reference ReferenceType="Organizes">i=25520</Reference>
+      <Reference ReferenceType="Organizes">i=25538</Reference>
+      <Reference ReferenceType="Organizes">i=25556</Reference>
+      <Reference ReferenceType="Organizes">i=25574</Reference>
+      <Reference ReferenceType="Organizes">i=25592</Reference>
+      <Reference ReferenceType="Organizes">i=25610</Reference>
+      <Reference ReferenceType="Organizes">i=25628</Reference>
+      <Reference ReferenceType="Organizes">i=25646</Reference>
+      <Reference ReferenceType="Organizes">i=25664</Reference>
+      <Reference ReferenceType="Organizes">i=25682</Reference>
+      <Reference ReferenceType="Organizes">i=25700</Reference>
+      <Reference ReferenceType="Organizes">i=25718</Reference>
+      <Reference ReferenceType="Organizes">i=25736</Reference>
+      <Reference ReferenceType="Organizes">i=25754</Reference>
+      <Reference ReferenceType="Organizes">i=25772</Reference>
+      <Reference ReferenceType="Organizes">i=25790</Reference>
+      <Reference ReferenceType="Organizes">i=25808</Reference>
+      <Reference ReferenceType="Organizes">i=25826</Reference>
+      <Reference ReferenceType="Organizes">i=25844</Reference>
+      <Reference ReferenceType="Organizes">i=25862</Reference>
+      <Reference ReferenceType="Organizes">i=25880</Reference>
+      <Reference ReferenceType="Organizes">i=25898</Reference>
+      <Reference ReferenceType="Organizes">i=25916</Reference>
+      <Reference ReferenceType="Organizes">i=25934</Reference>
+      <Reference ReferenceType="Organizes">i=25952</Reference>
+      <Reference ReferenceType="Organizes">i=25970</Reference>
+      <Reference ReferenceType="Organizes">i=25988</Reference>
+      <Reference ReferenceType="Organizes">i=26006</Reference>
+      <Reference ReferenceType="Organizes">i=26024</Reference>
+      <Reference ReferenceType="Organizes">i=26042</Reference>
+      <Reference ReferenceType="Organizes">i=26060</Reference>
+      <Reference ReferenceType="Organizes">i=26078</Reference>
+      <Reference ReferenceType="Organizes">i=26096</Reference>
+      <Reference ReferenceType="Organizes">i=26114</Reference>
+      <Reference ReferenceType="Organizes">i=26132</Reference>
+      <Reference ReferenceType="Organizes">i=26150</Reference>
+      <Reference ReferenceType="Organizes">i=26168</Reference>
+      <Reference ReferenceType="Organizes">i=26186</Reference>
+      <Reference ReferenceType="Organizes">i=26204</Reference>
+      <Reference ReferenceType="Organizes">i=26222</Reference>
+      <Reference ReferenceType="Organizes">i=26240</Reference>
+      <Reference ReferenceType="Organizes">i=26258</Reference>
+      <Reference ReferenceType="Organizes">i=26276</Reference>
+      <Reference ReferenceType="Organizes">i=26294</Reference>
+      <Reference ReferenceType="Organizes">i=26312</Reference>
+      <Reference ReferenceType="Organizes">i=26330</Reference>
+      <Reference ReferenceType="Organizes">i=26348</Reference>
+      <Reference ReferenceType="Organizes">i=26366</Reference>
+      <Reference ReferenceType="Organizes">i=26384</Reference>
+      <Reference ReferenceType="Organizes">i=26402</Reference>
+      <Reference ReferenceType="Organizes">i=26420</Reference>
+      <Reference ReferenceType="Organizes">i=26438</Reference>
+      <Reference ReferenceType="Organizes">i=26456</Reference>
+      <Reference ReferenceType="Organizes">i=26474</Reference>
+      <Reference ReferenceType="Organizes">i=26492</Reference>
+      <Reference ReferenceType="Organizes">i=26510</Reference>
+      <Reference ReferenceType="Organizes">i=26528</Reference>
+      <Reference ReferenceType="Organizes">i=26546</Reference>
+      <Reference ReferenceType="Organizes">i=26564</Reference>
+      <Reference ReferenceType="Organizes">i=26582</Reference>
+      <Reference ReferenceType="Organizes">i=26600</Reference>
+      <Reference ReferenceType="Organizes">i=26618</Reference>
+      <Reference ReferenceType="Organizes">i=26636</Reference>
+      <Reference ReferenceType="Organizes">i=26654</Reference>
+      <Reference ReferenceType="Organizes">i=26672</Reference>
+      <Reference ReferenceType="Organizes">i=26690</Reference>
+      <Reference ReferenceType="Organizes">i=26708</Reference>
+      <Reference ReferenceType="Organizes">i=26726</Reference>
+      <Reference ReferenceType="Organizes">i=26744</Reference>
+      <Reference ReferenceType="Organizes">i=26762</Reference>
+      <Reference ReferenceType="Organizes">i=26780</Reference>
+      <Reference ReferenceType="Organizes">i=26798</Reference>
+      <Reference ReferenceType="Organizes">i=26816</Reference>
+      <Reference ReferenceType="Organizes">i=26834</Reference>
+      <Reference ReferenceType="Organizes">i=26852</Reference>
+      <Reference ReferenceType="Organizes">i=26870</Reference>
+      <Reference ReferenceType="Organizes">i=26888</Reference>
+      <Reference ReferenceType="Organizes">i=26906</Reference>
+      <Reference ReferenceType="Organizes">i=26924</Reference>
+      <Reference ReferenceType="Organizes">i=26942</Reference>
+      <Reference ReferenceType="Organizes">i=26960</Reference>
+      <Reference ReferenceType="Organizes">i=26978</Reference>
+      <Reference ReferenceType="Organizes">i=26996</Reference>
+      <Reference ReferenceType="Organizes">i=27014</Reference>
+      <Reference ReferenceType="Organizes">i=27032</Reference>
+      <Reference ReferenceType="Organizes">i=27050</Reference>
+      <Reference ReferenceType="Organizes">i=27068</Reference>
+      <Reference ReferenceType="Organizes">i=27086</Reference>
+      <Reference ReferenceType="Organizes">i=27104</Reference>
+      <Reference ReferenceType="Organizes">i=27122</Reference>
+      <Reference ReferenceType="Organizes">i=27140</Reference>
+      <Reference ReferenceType="Organizes">i=27158</Reference>
+      <Reference ReferenceType="Organizes">i=27176</Reference>
+      <Reference ReferenceType="Organizes">i=27194</Reference>
+      <Reference ReferenceType="Organizes">i=27212</Reference>
+      <Reference ReferenceType="Organizes">i=27230</Reference>
+      <Reference ReferenceType="Organizes">i=27248</Reference>
+      <Reference ReferenceType="Organizes">i=27266</Reference>
+      <Reference ReferenceType="Organizes">i=27284</Reference>
+      <Reference ReferenceType="Organizes">i=27302</Reference>
+      <Reference ReferenceType="Organizes">i=27320</Reference>
+      <Reference ReferenceType="Organizes">i=27338</Reference>
+      <Reference ReferenceType="Organizes">i=27356</Reference>
+      <Reference ReferenceType="Organizes">i=27374</Reference>
+      <Reference ReferenceType="Organizes">i=27392</Reference>
+      <Reference ReferenceType="Organizes">i=27410</Reference>
+      <Reference ReferenceType="Organizes">i=27428</Reference>
+      <Reference ReferenceType="Organizes">i=27446</Reference>
+      <Reference ReferenceType="Organizes">i=27464</Reference>
+      <Reference ReferenceType="Organizes">i=27482</Reference>
+      <Reference ReferenceType="Organizes">i=27500</Reference>
+      <Reference ReferenceType="Organizes">i=27518</Reference>
+      <Reference ReferenceType="Organizes">i=27536</Reference>
+      <Reference ReferenceType="Organizes">i=27554</Reference>
+      <Reference ReferenceType="Organizes">i=27572</Reference>
+      <Reference ReferenceType="Organizes">i=27590</Reference>
+      <Reference ReferenceType="Organizes">i=27608</Reference>
+      <Reference ReferenceType="Organizes">i=27626</Reference>
+      <Reference ReferenceType="Organizes">i=27644</Reference>
+      <Reference ReferenceType="Organizes">i=27662</Reference>
+      <Reference ReferenceType="Organizes">i=27680</Reference>
+      <Reference ReferenceType="Organizes">i=27698</Reference>
+      <Reference ReferenceType="Organizes">i=27716</Reference>
+      <Reference ReferenceType="Organizes">i=27734</Reference>
+      <Reference ReferenceType="Organizes">i=27752</Reference>
+      <Reference ReferenceType="Organizes">i=27770</Reference>
+      <Reference ReferenceType="Organizes">i=27788</Reference>
+      <Reference ReferenceType="Organizes">i=27806</Reference>
+      <Reference ReferenceType="Organizes">i=27824</Reference>
+      <Reference ReferenceType="Organizes">i=27842</Reference>
+      <Reference ReferenceType="Organizes">i=27860</Reference>
+      <Reference ReferenceType="Organizes">i=27878</Reference>
+      <Reference ReferenceType="Organizes">i=27896</Reference>
+      <Reference ReferenceType="Organizes">i=27914</Reference>
+      <Reference ReferenceType="Organizes">i=27932</Reference>
+      <Reference ReferenceType="Organizes">i=27950</Reference>
+      <Reference ReferenceType="Organizes">i=27968</Reference>
+      <Reference ReferenceType="Organizes">i=27986</Reference>
+      <Reference ReferenceType="Organizes">i=28004</Reference>
+      <Reference ReferenceType="Organizes">i=28022</Reference>
+      <Reference ReferenceType="Organizes">i=28040</Reference>
+      <Reference ReferenceType="Organizes">i=28058</Reference>
+      <Reference ReferenceType="Organizes">i=28076</Reference>
+      <Reference ReferenceType="Organizes">i=28094</Reference>
+      <Reference ReferenceType="Organizes">i=28112</Reference>
+      <Reference ReferenceType="Organizes">i=28130</Reference>
+      <Reference ReferenceType="Organizes">i=28148</Reference>
+      <Reference ReferenceType="Organizes">i=28166</Reference>
+    </References>
+  </UAObject>
+  <UAObjectType NodeId="i=20001" BrowseName="0:ATV72">
+    <DisplayName>ATV72</DisplayName>
+    <Description>ATV72</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+      <Reference ReferenceType="HasProperty">i=20002</Reference>
+      <Reference ReferenceType="HasProperty">i=20003</Reference>
+      <Reference ReferenceType="HasProperty">i=20004</Reference>
+      <Reference ReferenceType="HasProperty">i=20005</Reference>
+      <Reference ReferenceType="HasProperty">i=20006</Reference>
+      <Reference ReferenceType="HasProperty">i=20007</Reference>
+      <Reference ReferenceType="HasProperty">i=20008</Reference>
+      <Reference ReferenceType="HasProperty">i=20009</Reference>
+      <Reference ReferenceType="HasProperty">i=20010</Reference>
+      <Reference ReferenceType="HasProperty">i=20011</Reference>
+      <Reference ReferenceType="HasProperty">i=20012</Reference>
+      <Reference ReferenceType="HasProperty">i=20013</Reference>
+      <Reference ReferenceType="HasProperty">i=20014</Reference>
+      <Reference ReferenceType="HasProperty">i=20015</Reference>
+      <Reference ReferenceType="HasProperty">i=20016</Reference>
+      <Reference ReferenceType="HasProperty">i=20017</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=20073" BrowseName="0:RegisterValue" ParentNodeId="i=20072" ValueRank="0" DataType="Int64">
+    <DisplayName>RegisterValue</DisplayName>
+    <Description>RegisterValue</Description>
+    <References>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:ListOfInt64>
+        <uax:Int64>25150</uax:Int64>
+      </uax:ListOfInt64>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20074" BrowseName="0:Code" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Code</DisplayName>
+    <Description>Code</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>LFRD</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20075" BrowseName="0:Name" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Name</DisplayName>
+    <Description>Name</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>Speed setpoint</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20076" BrowseName="0:Logic&#10;address" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Logic
+address</DisplayName>
+    <Description>Logic
+address</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>16#219A = 8602</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20077" BrowseName="0:CANopen&#10;index" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>CANopen
+index</DisplayName>
+    <Description>CANopen
+index</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>16#6042/00</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20078" BrowseName="0:INTERBUS&#10;index" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>INTERBUS
+index</DisplayName>
+    <Description>INTERBUS
+index</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>16#6042/00</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20079" BrowseName="0:DeviceNet&#10;path" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>DeviceNet
+path</DisplayName>
+    <Description>DeviceNet
+path</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>16#2A/01/08 = 42/1/8  (messaging)
+16#8C/01/03 = 140/1/3 (assembly)</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20080" BrowseName="0:Link" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Link</DisplayName>
+    <Description>Link</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>-</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20081" BrowseName="0:Category" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Category</DisplayName>
+    <Description>Category</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>Setpoint parameters</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20082" BrowseName="0:Access" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Access</DisplayName>
+    <Description>Access</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>R/W</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20083" BrowseName="0:Type" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Type</DisplayName>
+    <Description>Type</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>INT (Signed16)</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20084" BrowseName="0:Units" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Units</DisplayName>
+    <Description>Units</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>1 rpm</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20085" BrowseName="0:Factory setting" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Factory setting</DisplayName>
+    <Description>Factory setting</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>0 rpm</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20086" BrowseName="0:Range" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Range</DisplayName>
+    <Description>Range</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>-</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20087" BrowseName="0:Display" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Display</DisplayName>
+    <Description>Display</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>nan</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20088" BrowseName="0:Menu" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Menu</DisplayName>
+    <Description>Menu</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>nan</uax:String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=20089" BrowseName="0:Order" ParentNodeId="i=20072" DataType="String">
+    <DisplayName>Order</DisplayName>
+    <Description>Order</Description>
+    <References>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=20072</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+    </References>
+    <Value>
+      <uax:String>4</uax:String>
+    </Value>
+  </UAVariable>
+</UANodeSet>

@@ -6,6 +6,11 @@ import datetime
 import time
 from PIL import ImageTk, Image
 from server.edge_device import *
+from opcua.common.xmlexporter import XmlExporter
+
+from lxml import etree
+
+
 
 NCOLUMNS = 9
 NROWS    = 30
@@ -35,9 +40,17 @@ dev = {'len':13,
 def serverLoop():
     try:
         edgeDevice.queryLegacyAndUpdateCache()
-        obj = (edgeDevice.getAndUpsertOpcNodeFromRegister(list(edgeDevice.registerAddressToXmlIndex.keys())[9]))
-        value = obj.get_child("RegisterValue")
-        print(value.get_value())
+
+        #OPC-UA object
+        for i in edgeDevice.registersToWatch:
+            #get the modbus value
+            print(edgeDevice.readLegacyRegisterWithCaching(i))
+
+            # get the OPC-UA values
+            obj = edgeDevice.getAndUpsertOpcNodeFromRegister(i)
+
+            opcuaServer.export_xml(obj.get_referenced_nodes(), "cache/opcuanodes-%i.xml" % (i))
+
 
     except Exception as e:
         print(e)
@@ -100,13 +113,22 @@ def onDeviceFamilyClick(name):
     lab08['bg']   = DEVICE_LIST_COLOR
     SELECTED_FAMILY = name
     for i in range(len(dev[name])):
-        tk.Button(root,text=dev[name][i],activebackground=DETAILED_SECTION_COLOR,
-                    padx=PAD_X,bd=0,command=lambda val=dev[name][i]: onDeviceClick(val),
-                         bg = DEVICE_LIST_COLOR,highlightthickness=0,anchor='w'
-                    ).grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=i+1,sticky='NWSE',columnspan=DEVICE_COLUMNS)
+        if i==0:
+            tk.Button(root,text=dev[name][i],activebackground=DEVICE_LIST_COLOR,
+                        padx=PAD_X,bd=0,command=lambda val=dev[name][i]: onDeviceClick(val),
+                            bg = DEVICE_LIST_COLOR,highlightthickness=0,anchor='w'
+                        ).grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=i+1,sticky='NWSE',columnspan=DEVICE_COLUMNS)
 
-        tk.Label(root, image = statusOnline,bg=DEVICE_LIST_COLOR,width=10, height=10, activebackground=DETAILED_SECTION_COLOR
-        ).grid(row=i+1,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS+1,columnspan=1,sticky='NSE',padx=PAD_X)
+            tk.Label(root, image = statusOnline,bg=DEVICE_LIST_COLOR,width=10, height=10, activebackground=DETAILED_SECTION_COLOR
+            ).grid(row=i+1,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS+1,columnspan=1,sticky='NSE',padx=PAD_X)
+        else:
+            tk.Button(root,text=dev[name][i],activebackground=DEVICE_LIST_COLOR,
+                        padx=PAD_X,bd=0,command=lambda val=dev[name][i]: onDeviceClick(val),
+                            bg = DEVICE_LIST_COLOR,highlightthickness=0,anchor='w'
+                        ).grid(column=SIDEMENU_COLUMNS+DEVICE_COLUMNS,row=i+1,sticky='NWSE',columnspan=DEVICE_COLUMNS)
+
+            tk.Label(root, image = statusOffline,bg=DEVICE_LIST_COLOR,width=10, height=10, activebackground=DETAILED_SECTION_COLOR
+            ).grid(row=i+1,column=SIDEMENU_COLUMNS+DEVICE_COLUMNS+1,columnspan=1,sticky='NSE',padx=PAD_X)
 
 
 def onDeviceClick(name):
@@ -151,11 +173,11 @@ def update(device=0):
         data03v['text'] = '- '
         data04v['text'] = '- '
         
-        tk.Button(root,text='Configure parameters',activebackground=SIDEMENU_COLOR,
+        '''tk.Button(root,text='Configure parameters',activebackground=SIDEMENU_COLOR,
                     padx=0,pady=0,bd=0,command=onConfigureClick,
                          bg = DEVICE_LIST_COLOR,highlightthickness=0
                     ).grid(column=NCOLUMNS-1,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
-
+        '''
         root.after(10,update)
 
 
@@ -219,12 +241,17 @@ lab07 = tk.Label(root,text='Detected protocols ',bg=DEVICE_FAMILY_COLOR,font=jus
 # Fill the interface with the available connected devices
 
 
-
 for i in range(1,len(dev.keys())):
-    button_i = tk.Button(root,text=list(dev.keys())[i],activebackground=DEVICE_LIST_COLOR,
-                         padx=PAD_X,bd=0,command=lambda val=list(dev.keys())[i]: onDeviceFamilyClick(val),
-                         bg = DEVICE_FAMILY_COLOR,highlightthickness=0, anchor='w'
-    ).grid(column=SIDEMENU_COLUMNS,row=i,sticky='NWSE',columnspan=DEVICE_COLUMNS)
+    if i==1:
+        tk.Button(root,text=list(dev.keys())[i],activebackground=DEVICE_LIST_COLOR,
+                            padx=PAD_X,bd=0,command=lambda val=list(dev.keys())[i]: onDeviceFamilyClick(val),
+                            bg = DEVICE_FAMILY_COLOR,highlightthickness=0, anchor='w'
+        ).grid(column=SIDEMENU_COLUMNS,row=i,sticky='NWSE',columnspan=DEVICE_COLUMNS)
+    else:
+        tk.Label(root,text=list(dev.keys())[i],activebackground=DEVICE_FAMILY_COLOR,
+                            padx=PAD_X,bd=0,fg='#737373',
+                            bg = DEVICE_FAMILY_COLOR,highlightthickness=0, anchor='w'
+        ).grid(column=SIDEMENU_COLUMNS,row=i,sticky='NWSE',columnspan=DEVICE_COLUMNS)
 
 
 #==========DEVICE LIST==========
@@ -266,6 +293,7 @@ data04  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
 data04.grid(row=8,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
 data04v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
 data04v.grid(row=9,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
+
 
 #=========SETTINGS PAGE=========
 frame05 = tk.Frame(root, bg=DETAILED_SECTION_COLOR)
