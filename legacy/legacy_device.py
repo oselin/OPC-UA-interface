@@ -11,7 +11,7 @@ try:
     print("Starting Legacy device...")
     server.start()
     print("Legacy device started. Filling the registries with default data")
-    excelData = pd.read_excel('../data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
+    excelData = pd.read_excel('data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
     df = pd.DataFrame(excelData)
     for i in range(0, 931):
         registerString = df.at[i, 'Logic\naddress']

@@ -35,6 +35,9 @@ dev = {'len':13,
 def serverLoop():
     try:
         edgeDevice.queryLegacyAndUpdateCache()
+        obj = (edgeDevice.getAndUpsertOpcNodeFromRegister(list(edgeDevice.registerAddressToXmlIndex.keys())[9]))
+        value = obj.get_child("RegisterValue")
+        print(value.get_value())
 
     except Exception as e:
         print(e)

@@ -25,7 +25,7 @@ class EdgeDevice():
         types = self.opcuaServer.get_node(ua.ObjectIds.BaseObjectType)
         self.ATV72TYPE = types.add_object_type(0, "ATV72")
 
-        self.excelData = pd.read_excel('../data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
+        self.excelData = pd.read_excel('data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
         self.df = pd.DataFrame(self.excelData)
 
         for col in self.df.columns:
@@ -57,7 +57,7 @@ class EdgeDevice():
                     atv72object.add_property(0, string[0], str(self.df.at[i, string[0]]))'''
 
     def queryLegacyAndUpdateCache(self):
-        for (registerAddress, value) in self.registerCache:
+        for (registerAddress, value) in self.registerCache.items():
             value = self.modbusClient.read_holding_registers(registerAddress)
             if value != self.registerCache[registerAddress]:
                 print("new value for register " + str(registerAddress) + ". from " + str(self.registerCache[registerAddress]) + " to " + str(value))
@@ -90,7 +90,7 @@ class EdgeDevice():
                 return atv72object
             except: #if it doesnt exist then create it and return it
                 atv72object: Node = self.opcuaObjects.add_object(0, self.df.at[idx, 'Name'], self.ATV72TYPE)
-                atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching())
+                atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching(registerAddress))
 
                 for prop in self.ATV72TYPE.get_properties():
                     p: Node = prop
