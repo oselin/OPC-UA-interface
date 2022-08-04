@@ -101,11 +101,12 @@ class EdgeDevice():
                 atv72object: Node = self.opcuaObjects.get_child(self.df.at[idx, 'Name'])
                 value = atv72object.get_child("RegisterValue")
                 value.set_value(self.readLegacyRegisterWithCaching(registerAddress))
+                print("modified old node from address " + str(registerAddress))
                 return atv72object
             except: #if it doesnt exist then create it and return it
                 atv72object: Node = self.opcuaObjects.add_object(0, self.df.at[idx, 'Name'], self.ATV72TYPE)
                 atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching(registerAddress))
-
+                print("created new node from address " + str(registerAddress))
                 for prop in self.ATV72TYPE.get_properties():
                     p: Node = prop
                     string = str(p.get_display_name())
@@ -115,19 +116,26 @@ class EdgeDevice():
                     atv72object.add_property(0, string[0], str(self.df.at[idx, string[0]]))
 
                 return atv72object
-        else: #object data UNKNOWN so create one with UKNOWN field data everywhere
-            atv72object: Node = self.opcuaObjects.add_object(0, "UNKNOWN_" + str(registerAddress), self.ATV72TYPE)
-            atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching(registerAddress))
+        else: #object data UNKNOWN so create one with UKNOWN field data everywhere or modify it if it exists already
+            try:
+                atv72object: Node = self.opcuaObjects.get_child("UNKNOWN_" + str(registerAddress))
+                value = atv72object.get_child("RegisterValue")
+                value.set_value(self.readLegacyRegisterWithCaching(registerAddress))
+                print("modified UKNOWN node from address " + str(registerAddress))
+                return atv72object
+            except:
+                atv72object: Node = self.opcuaObjects.add_object(0, "UNKNOWN_" + str(registerAddress), self.ATV72TYPE)
+                atv72object.add_variable(0, 'RegisterValue', self.readLegacyRegisterWithCaching(registerAddress))
+                print("created new UNKNOWN node from address " + str(registerAddress))
+                for prop in self.ATV72TYPE.get_properties():
+                    p: Node = prop
+                    string = str(p.get_display_name())
+                    string = string.split(':')
+                    string = string[string.__len__() - 1].split(')')
 
-            for prop in self.ATV72TYPE.get_properties():
-                p: Node = prop
-                string = str(p.get_display_name())
-                string = string.split(':')
-                string = string[string.__len__() - 1].split(')')
+                    atv72object.add_property(0, string[0], "UKNOWN")
 
-                atv72object.add_property(0, string[0], "UKNOWN")
-
-            return atv72object
+                return atv72object
 
     def writeToLegacyDeviceAndCache(self, registerAddress:int, value:int):
         self.modbusClient.write_single_register(registerAddress, value)
