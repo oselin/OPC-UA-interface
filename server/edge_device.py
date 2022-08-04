@@ -4,6 +4,7 @@ from typing import Any, Dict
 from pyModbusTCP.client import ModbusClient
 import pandas as pd
 import re as regex
+import random
 
 from opcua import ua, Server, Node
 
@@ -14,6 +15,7 @@ class EdgeDevice():
     registerAddressToXmlIndex = dict()
     ATV72TPYE: Node
     registerCache             = dict()
+    registersToWatch         = list()
 
     def __init__(self,opcuaServer,modbusClient,opcuaObjects,noEntriesInitialized):
         self.opcuaServer:Server = opcuaServer
@@ -31,9 +33,14 @@ class EdgeDevice():
         for col in self.df.columns:
             self.ATV72TYPE.add_property(0, col, "")
 
+
+
         self.ATV72TYPE.set_modelling_rule(True)
 
         print("Device info read. Indexing registers")
+
+        noKnownRegisters = 5
+        idx = 0
 
         for i in range(0, self.noEntriesInitialized):
             print("Reading " + str(i) + "/" + str(self.noEntriesInitialized))
@@ -42,6 +49,9 @@ class EdgeDevice():
                 numbers = regex.findall(r'\d+', registerString)
                 registerAddress = (int)(numbers[numbers.__len__() - 1])
                 self.registerAddressToXmlIndex[registerAddress] = i
+                if idx < noKnownRegisters:
+                    self.registersToWatch.append(registerAddress)
+                    idx = idx + 1
                 '''value = self.modbusClient.read_holding_registers(registerAddress)
                 self.bytesRead = self.bytesRead + 2
                 self.registerValues[registerAddress] = value
@@ -55,6 +65,10 @@ class EdgeDevice():
                     string = string[string.__len__() - 1].split(')')
 
                     atv72object.add_property(0, string[0], str(self.df.at[i, string[0]]))'''
+        random.seed(0)
+        noRandomRegisters = 5
+        for i in range(0, noRandomRegisters):
+            self.registersToWatch.append((int)(random.random() * 32000))
 
     def queryLegacyAndUpdateCache(self):
         for (registerAddress, value) in self.registerCache.items():

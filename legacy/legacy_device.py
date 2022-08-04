@@ -12,24 +12,38 @@ try:
     server.start()
     print("Legacy device started. Filling the registries with default data")
     excelData = pd.read_excel('data/ATV71_communication_parameters_EN_V5.7_IE67.xls', 1)
+    noKnownRegisters = 5
+    idx = 0
+    registersToModify = list()
     df = pd.DataFrame(excelData)
     for i in range(0, 931):
         registerString = df.at[i, 'Logic\naddress']
         if registerString != '-':
             numbers = regex.findall(r'\d+', registerString)
             registerAddress = (int)(numbers[numbers.__len__() - 1])
-            registers.append(registerAddress)
-            registerValueType = (str)(df.at[i, 'Type'])
-            defaultSetting = (str)(df.at[i, 'Factory setting'])
+
+            if idx < 5:
+                registersToModify.append(registerAddress)
+                idx = idx + 1
+            
             server.data_bank.set_holding_registers(registerAddress, [-1])
-    print("Filling ended")
+    print("Legacy device: Filling registers with default values ended")
+    random.seed(0)
+    noRandomRegisters = 5
+    for i in range(0, noRandomRegisters):
+        registersToModify.append((int)(random.random() * 32000))
+
+    idx = 0
     while True:
-        time.sleep(5)
-        randomRegisterIndex = (int)(random.random() * registers.__len__() - 1)
-        randomRegister = registers[randomRegisterIndex]
+        time.sleep(1)
+        if idx >= 10:
+            idx = 0
+        randomRegister = registersToModify[idx]
+        idx = idx + 1
         randomValue = (int)(random.random() * 32000)
+        oldValue = server.data_bank.get_holding_registers(randomRegister)
         server.data_bank.set_holding_registers(randomRegister, [randomValue])
-        print("register " + str(randomRegister) + " changed to " + str(randomValue))
+        print("register " + str(randomRegister) + " changed its value from " + str(oldValue) + " to " + str(randomValue))
         continue
 except BaseException as e:
     print(e)
