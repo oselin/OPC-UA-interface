@@ -8,197 +8,197 @@
     <Alias Alias="HasProperty">i=46</Alias>
     <Alias Alias="HasComponent">i=47</Alias>
   </Aliases>
-  <UAVariable NodeId="i=24783" BrowseName="0:RegisterValue" ParentNodeId="i=24782" ValueRank="0" DataType="Int64">
+  <UAVariable NodeId="i=44115" BrowseName="0:RegisterValue" ParentNodeId="i=44114" ValueRank="0" DataType="Int64">
     <DisplayName>RegisterValue</DisplayName>
     <Description>RegisterValue</Description>
     <References>
-      <Reference ReferenceType="HasComponent" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
     </References>
     <Value>
       <uax:ListOfInt64>
-        <uax:Int64>30440</uax:Int64>
+        <uax:Int64>4845</uax:Int64>
       </uax:ListOfInt64>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24784" BrowseName="0:Code" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44116" BrowseName="0:Code" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Code</DisplayName>
     <Description>Code</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24785" BrowseName="0:Name" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44117" BrowseName="0:Name" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Name</DisplayName>
     <Description>Name</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24786" BrowseName="0:Logic&#10;address" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44118" BrowseName="0:Logic&#10;address" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Logic
 address</DisplayName>
     <Description>Logic
 address</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24787" BrowseName="0:CANopen&#10;index" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44119" BrowseName="0:CANopen&#10;index" ParentNodeId="i=44114" DataType="String">
     <DisplayName>CANopen
 index</DisplayName>
     <Description>CANopen
 index</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24788" BrowseName="0:INTERBUS&#10;index" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44120" BrowseName="0:INTERBUS&#10;index" ParentNodeId="i=44114" DataType="String">
     <DisplayName>INTERBUS
 index</DisplayName>
     <Description>INTERBUS
 index</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24789" BrowseName="0:DeviceNet&#10;path" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44121" BrowseName="0:DeviceNet&#10;path" ParentNodeId="i=44114" DataType="String">
     <DisplayName>DeviceNet
 path</DisplayName>
     <Description>DeviceNet
 path</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24790" BrowseName="0:Link" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44122" BrowseName="0:Link" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Link</DisplayName>
     <Description>Link</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24791" BrowseName="0:Category" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44123" BrowseName="0:Category" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Category</DisplayName>
     <Description>Category</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24792" BrowseName="0:Access" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44124" BrowseName="0:Access" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Access</DisplayName>
     <Description>Access</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24793" BrowseName="0:Type" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44125" BrowseName="0:Type" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Type</DisplayName>
     <Description>Type</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24794" BrowseName="0:Units" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44126" BrowseName="0:Units" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Units</DisplayName>
     <Description>Units</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24795" BrowseName="0:Factory setting" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44127" BrowseName="0:Factory setting" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Factory setting</DisplayName>
     <Description>Factory setting</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24796" BrowseName="0:Range" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44128" BrowseName="0:Range" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Range</DisplayName>
     <Description>Range</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24797" BrowseName="0:Display" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44129" BrowseName="0:Display" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Display</DisplayName>
     <Description>Display</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24798" BrowseName="0:Menu" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44130" BrowseName="0:Menu" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Menu</DisplayName>
     <Description>Menu</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>
       <uax:String>UKNOWN</uax:String>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=24799" BrowseName="0:Order" ParentNodeId="i=24782" DataType="String">
+  <UAVariable NodeId="i=44131" BrowseName="0:Order" ParentNodeId="i=44114" DataType="String">
     <DisplayName>Order</DisplayName>
     <Description>Order</Description>
     <References>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=24782</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=44114</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
     </References>
     <Value>

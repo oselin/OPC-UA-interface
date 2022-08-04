@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.font as font
+
 import psutil
 import platform
 import datetime
@@ -23,10 +24,8 @@ BOTTOM_MENU_COLOR      = '#0066ff'
 SELECTED_FAMILY = None
 SELECTED_DEVICE = None
 
-ID    = 0
-TEMP  = 0
-CLOCK = 0
-STARTED = 0
+FETCHED_REGISTRIES = 10
+SHOW_DATA = None
 
 dev = {'len':13,
        'MODBUS-RTU':['TC0451','TB3421','PO0187','ZJ3253'],
@@ -34,19 +33,31 @@ dev = {'len':13,
        'FIELDBUS'  :['D4512','AZ24785','SD2342','FH5323','AF7593']
 }
 
+def showOPCUA(index):
+    global SHOW_DATA
+    SHOW_DATA = index
+
 def serverLoop():
     try:
         edgeDevice.queryLegacyAndUpdateCache()
 
+        dummy = 0
         #OPC-UA object
         for i in edgeDevice.registersToWatch:
             #get the modbus value
-            print(edgeDevice.readLegacyRegisterWithCaching(i))
 
+            mytable[dummy][0]['text'] = i
+            mytable[dummy][1]['text'] = edgeDevice.readLegacyRegisterWithCaching(i)
+
+            dummy += 1
             # get the OPC-UA values
             obj = edgeDevice.getAndUpsertOpcNodeFromRegister(i)
-
             opcuaServer.export_xml(obj.get_children(), "cache/opcuanodes-%i.xml" % (i))
+            if SHOW_DATA == dummy:
+                myOPCdata = open("cache/opcuanodes-%i.xml" % (i),'r')
+                OPCdata.delete('1.0',tk.END)
+                OPCdata.insert(tk.END,myOPCdata.read())
+                myOPCdata.close()
 
 
     except Exception as e:
@@ -88,22 +99,6 @@ def startService():
     serverLoop()
 
 
-def onConfigureClick():
-    frame05.grid(column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,row=2,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=NROWS-1,sticky='NWSE')
-    frame05.grid_propagate(0)
-    #lab_dev.grid(row=0,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS, columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2,sticky='NWSE')
-
-    lab09  .grid(row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=3)
-    cbID   .grid(row=3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NWS',padx=PAD_X)
-    cbTemp .grid(row=4,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NWS',padx=PAD_X)
-    cbClock.grid(row=5,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NWS',padx=PAD_X)
-
-    tk.Button(root,text='Save and close',activebackground=SIDEMENU_COLOR,
-                    padx=0,pady=0,bd=0,command=lambda: update(SELECTED_DEVICE),
-                         bg = DEVICE_LIST_COLOR,highlightthickness=0
-                    ).grid(column=NCOLUMNS-1,row=NROWS-2,sticky='NWSE',columnspan=1,padx=PAD_X,pady=PAD_X)
-
-
 def onDeviceFamilyClick(name):
     global SELECTED_FAMILY
     frame03['bg'] = DEVICE_LIST_COLOR
@@ -132,6 +127,20 @@ def onDeviceClick(name):
     global SELECTED_DEVICE
     lab_dev['text'] = name
     SELECTED_DEVICE = name
+
+    tk.Label(root,text='Registry',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black').grid(
+    row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NWSE')
+
+    tk.Label(root,text='Native value',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black').grid(
+    row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NWSE')
+
+    for i in range(FETCHED_REGISTRIES):
+        #get the modbus value
+
+        mytable[i][0].grid(row=i+3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS  ,sticky='NWSE')
+        mytable[i][1].grid(row=i+3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NWSE')
+        mytable[i][2].grid(row=i+3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+2,sticky='NWSE')
+    OPCdata.grid(row=i+4,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS  ,sticky='NWSE',columnspan=3,rowspan=NROWS-(i+4))
     update(name)
 
 
@@ -152,7 +161,7 @@ def coolBottomBar():
 
 def update(device=0):
     if device:
-        frame05.grid_forget()
+        '''frame05.grid_forget()
         lab09  .grid_forget()
         cbID   .grid_forget()
         cbTemp .grid_forget()
@@ -169,6 +178,7 @@ def update(device=0):
         data02v['text'] = '-  '
         data03v['text'] = '- '
         data04v['text'] = '- '
+        '''
         
         '''tk.Button(root,text='Configure parameters',activebackground=SIDEMENU_COLOR,
                     padx=0,pady=0,bd=0,command=onConfigureClick,
@@ -268,43 +278,18 @@ frame04.grid_propagate(0)
 lab_dev = tk.Label(text='',font=dev_font,bg = DETAILED_SECTION_COLOR)
 lab_dev.grid(row=0,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS, columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2,sticky='NWSE')
 
-data00  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data00.grid(row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
-data00v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data00v.grid(row=2,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
+reg00  = tk.Label(root,text='Registry',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black')
+reg00v = tk.Label(root,text='Native value',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black')
 
-data01  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data01.grid(row=3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
-data01v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data01v.grid(row=3,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
-data02  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data02.grid(row=4,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X) 
-data02v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data02v.grid(row=4,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS+1,sticky='NW',padx=PAD_X)
+mytable = list()
+for i in range(FETCHED_REGISTRIES):
+    mytable.append([
+            tk.Label(root,text='-',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black'),
+            tk.Label(root,text='-',bg=DETAILED_SECTION_COLOR,font=justBold,highlightthickness=1,highlightbackground='black'),
+            tk.Button(root,text='See OPC-UA data',activebackground=SIDEMENU_COLOR,padx=0,pady=0,bd=0,command=lambda var=i:showOPCUA(var),bg = DEVICE_LIST_COLOR,highlightthickness=0)
+    ])
 
-data03  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data03.grid(row=5,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
-data03v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data03v.grid(row=6,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
-data04  = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data04.grid(row=8,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X)
-data04v = tk.Label(root,text='',bg=DETAILED_SECTION_COLOR,font=justBold)
-data04v.grid(row=9,column=SIDEMENU_COLUMNS+2*DEVICE_COLUMNS,sticky='NW',padx=PAD_X,columnspan=NCOLUMNS - 2*SIDEMENU_COLUMNS,rowspan=2)
-
-
-#=========SETTINGS PAGE=========
-frame05 = tk.Frame(root, bg=DETAILED_SECTION_COLOR)
-
-lab09 = tk.Label(root,text='Settings and custom queries ',bg=DETAILED_SECTION_COLOR,font=justBold)
-
-cbID = tk.Checkbutton(root, text='ID',variable=ID, onvalue=1, offvalue=0,bg=DETAILED_SECTION_COLOR,
-                    highlightthickness=0,activebackground=DETAILED_SECTION_COLOR)
-
-cbTemp = tk.Checkbutton(root, text='Temperature',variable=TEMP, onvalue=1, offvalue=0,bg=DETAILED_SECTION_COLOR,
-                    highlightthickness=0,activebackground=DETAILED_SECTION_COLOR)
-
-cbClock = tk.Checkbutton(root, text='Clock',variable=CLOCK, onvalue=1, offvalue=0,bg=DETAILED_SECTION_COLOR,
-                    highlightthickness=0,activebackground=DETAILED_SECTION_COLOR)
+OPCdata = tk.Text(root,bg='black',fg=DETAILED_SECTION_COLOR)
 
 
 #==========BOTTOM MENU==========
@@ -315,7 +300,7 @@ frame06.grid_propagate(0)
 labRAM = tk.Label(root,text='Ram usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
 labRAM.grid(row=NROWS-1,column=NCOLUMNS-1,columnspan=1,sticky='NWS')
 
-labCPU = tk.Label(root,text='CPU usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
+labCPU = tk.Label(root,text='CPU usage: -',bg=BOTTOM_MENU_COLOR,fg='white') 
 labCPU.grid(row=NROWS-1,column=NCOLUMNS-2,columnspan=1,sticky='NWS')
 
 labTEMP = tk.Label(root,text='CPU usage: -',bg=BOTTOM_MENU_COLOR,fg='white')
