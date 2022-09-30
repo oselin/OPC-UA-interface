@@ -15,3 +15,5 @@ On a new terminal, launch the software
 python3 main.py
 ```
 To start the serial communication, please enable the listening thrugh the UI, as shown in the following GIF.
+
+![Alt Text](/media/demo.gif)

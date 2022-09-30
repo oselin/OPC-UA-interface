@@ -29,8 +29,8 @@ SHOW_DATA = None
 
 STATUS = 0
 dev = {'len':13,
-       'MODBUS-RTU':['TC0451','TB3421','PO0187','ZJ3253'],
-       'MODBUS-TCP':['TP-1312','RM-3112','ZZ53412','CW5823',],
+       'MODBUS-TCP':['ATV71','ATV61','ATV51','ATV81','ATV91','ATV91-2','ATV61-2'],
+       'MODBUS-RTU':['TP-1312','RM-3112','ZZ53412','CW5823',],
        'FIELDBUS'  :['D4512','AZ24785','SD2342','FH5323','AF7593']
 }
 
@@ -175,7 +175,7 @@ def coolBottomBar():
     if platform.system() == 'Linux':
         labTEMP['text'] = 'CPU temperature: ' + str(psutil.sensors_temperatures()['coretemp'][1][1])
     
-    uptime['text']  = '10d ' + datetime.datetime.now().strftime('%Hh %Mmin %Ssec')
+    uptime['text']  = '0d 0h 0min ' + datetime.datetime.now().strftime('%Ssec')
 
     root.after(500,coolBottomBar)
 
